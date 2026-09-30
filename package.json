@@ -1,0 +1,12 @@
+{
+  "name": "cheabin",
+  "version": "1.0.0",
+  "description": "대원 10기 성우 임채빈 데뷔 7주년 특전 페이지",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
