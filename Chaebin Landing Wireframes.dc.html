@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><style>body{margin:0;background:#eef1f0;font-family:'Gothic A1',system-ui,sans-serif}a{color:#1b7fa8;text-decoration:none}a:hover{color:#125b78}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px 'IBM Plex Mono',monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 'Gothic A1',sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px 'IBM Plex Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'Gothic A1',sans-serif;color:rgba(0,0,0,.55)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}.dv-next{margin:22px 0 0;font:12px/1.5 'Gothic A1',sans-serif;color:rgba(0,0,0,.5)}.ph{background-image:repeating-linear-gradient(135deg,rgba(0,0,0,.055) 0 6px,rgba(0,0,0,0) 6px 12px)}.mono{font-family:'IBM Plex Mono',monospace}@keyframes bobA{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(-2deg)}}@keyframes bobB{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-8px) rotate(8deg)}}</style></helmet>
+
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname"><a class="dv-oid" href="#2a">2a</a> 기반 · ENDLESS HORIZON 포스터 배경 + 하단 그라데이션</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="3a">
+<div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>포스터 배경 · KV 타이틀 이미지 · 1b형 갤러리</div>
+<div class="dv-card" style="width:390px;height:844px;position:relative">
+<div ref="{{ scroll3 }}" onScroll="{{ onScroll3 }}" style="height:100%;overflow-y:auto;overscroll-behavior:contain">
+<div style="position:relative;overflow:hidden;background:#eef7f2">
+  <div style="position:absolute;left:-20px;right:-20px;top:-20px;height:900px;background-image:url(assets/endless-horizon-poster.png);background-size:cover;background-position:center top;filter:blur(16px)"></div>
+  <div style="position:absolute;left:0;right:0;top:0;height:980px;background:linear-gradient(180deg,rgba(40,140,200,.32) 0%,rgba(40,140,200,.14) 20%,rgba(255,255,255,0) 30%,rgba(238,247,242,.55) 56%,#eef7f2 84%)"></div>
+
+  <div style="position:relative;padding:20px 20px 30px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div class="mono" style="font-size:11px;letter-spacing:.18em;color:#fff">LIM CHAE BIN</div>
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.55)"></div>
+    </div>
+
+    <div style="padding:18px 0 22px;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <img src="assets/kv-title.png" alt="ENDLESS HORIZON" style="display:block;width:100%;max-width:350px;height:auto">
+      <div style="font-size:13px;line-height:1.6;font-weight:700;color:#fff;text-align:center;text-shadow:0 1px 8px rgba(0,60,110,.4)">대원 10기 성우 임채빈 데뷔 7주년 특전 페이지</div>
+    </div>
+
+    <div onClick="{{ playD }}" style="cursor:pointer;backdrop-filter:blur(12px);background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:52px;height:52px;flex:none;border-radius:50%;background:#083744;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px">{{ dIcon }}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:15px;font-weight:800;color:#083744">음성 특전 듣기</div>
+          <div style="margin-top:3px;font-size:11px;color:rgba(8,55,68,.6)">{{ dStatus }}</div>
+        </div>
+        <div class="mono" style="font-size:10px;color:rgba(8,55,68,.5)">{{ dTime }}</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:30px">
+        <sc-for list="{{ barsD }}" as="b" hint-placeholder-count="22"><div style="flex:1;border-radius:2px;background:rgba(8,55,68,.35);height:{{ b }}"></div></sc-for>
+      </div>
+    </div>
+
+    <div onClick="{{ noop }}" style="cursor:pointer;border-radius:8px;padding:15px 16px;background:#0d3d4f;display:flex;align-items:center;justify-content:space-between" style-hover="background:#12556e">
+      <div style="font-size:14px;font-weight:700;color:#fff">영상 특전 다운로드</div>
+      <div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px">↓</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+      <div style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1/1.1;background:#3f9fc4;transition:background .2s" style-hover="background:#5cb5d6">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">YOUTUBE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">영상<br>보러가기</div>
+        </div>
+      </div>
+      <div style="cursor:pointer;position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1/1.1;background:#4aa87c;transition:background .2s" style-hover="background:#63bd93">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">FANCAFE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">함께<br>이야기해요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;background:#f4faf8;padding:26px 20px 34px;border-radius:26px 26px 0 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between">
+      <div style="font-size:16px;font-weight:900;color:#083744">갤러리</div>
+      <div class="mono" style="font-size:11px;color:rgba(8,55,68,.45)">{{ gLabelD }}</div>
+    </div>
+    <div style="margin-top:14px;overflow:hidden">
+      <div style="display:flex;align-items:flex-start;gap:10px;transform:translateX({{ gShiftE }});transition:{{ gTransD }}">
+        <sc-for list="{{ slidesE }}" as="sl" hint-placeholder-count="15">
+          <div style="flex:none;width:284px;opacity:{{ sl.op }};transition:opacity .5s">
+            <sc-if value="{{ sl.img }}" hint-placeholder-val="{{ false }}"><img src="{{ sl.src }}" alt="" style="display:block;width:100%;height:auto;border-radius:8px"></sc-if>
+            <sc-if value="{{ sl.ph }}" hint-placeholder-val="{{ true }}"><div class="ph" style="height:355px;border-radius:8px;background-color:#e3eeee"></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="margin-top:14px;display:flex;align-items:center;gap:10px">
+      <div onClick="{{ gPrevD }}" style="cursor:pointer;width:36px;height:36px;border-radius:50%;border:1px solid rgba(8,55,68,.18);display:flex;align-items:center;justify-content:center;color:#083744" style-hover="background:#fff">‹</div>
+      <div onClick="{{ gNextD }}" style="cursor:pointer;width:36px;height:36px;border-radius:50%;border:1px solid rgba(8,55,68,.18);display:flex;align-items:center;justify-content:center;color:#083744" style-hover="background:#fff">›</div>
+      <div style="flex:1;height:2px;background:rgba(8,55,68,.12);border-radius:2px;overflow:hidden"><div style="height:100%;width:{{ gProgressE }};background:#4aa87c;transition:width .5s"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+{{ floaters3 }}
+<div onClick="{{ toTop3 }}" style="cursor:pointer;position:absolute;right:16px;bottom:18px;width:44px;height:44px;border-radius:50%;background:rgba(8,55,68,.88);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:0 4px 14px rgba(8,55,68,.25);opacity:{{ topOp3 }};pointer-events:{{ topPe3 }};transform:translateY({{ topY3 }});transition:opacity .3s,transform .3s" style-hover="background:#0d3d4f">
+  <div style="font-size:12px;line-height:1">↑</div>
+  <div class="mono" style="font-size:8px;letter-spacing:.08em;line-height:1">TOP</div>
+</div>
+</div>
+</div>
+</div>
+<p class="dv-next">다음 시도: "<a class="dv-oid" href="#3a">3a</a>를 PC 접속 화면(좌우 여백 포함)으로" · "나머지 갤러리 이미지 넣어줄게"</p>
+</section>
+
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname"><a class="dv-oid" href="#1b">1b</a> 기반 + <a class="dv-oid" href="#1a">1a</a>의 갤러리 · 영상 다운로드</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>글래스 히어로 + 정리형 갤러리 / 다운로드</div>
+<div class="dv-card" style="width:390px">
+<div style="position:relative;background:linear-gradient(165deg,#7fd0e8 0%,#a9e2d5 55%,#e9f6ef 100%)">
+  <div class="ph" style="position:absolute;inset:0;opacity:.7"></div>
+  <div style="position:absolute;left:0;right:0;top:0;height:420px;background:radial-gradient(120% 80% at 20% 0%,rgba(255,255,255,.65),rgba(255,255,255,0))"></div>
+
+  <div style="position:relative;padding:20px 20px 30px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div class="mono" style="font-size:11px;letter-spacing:.18em;color:#0b4356">CHAEBIN</div>
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.55)"></div>
+    </div>
+
+    <div style="padding:34px 0 30px">
+      <div class="mono" style="font-size:9px;letter-spacing:.2em;color:rgba(11,67,86,.6)">SPECIAL BENEFIT</div>
+      <div style="margin-top:10px;font-size:34px;font-weight:900;line-height:1.15;color:#083744;letter-spacing:-.02em">오늘,<br>목소리부터</div>
+      <div style="margin-top:12px;font-size:13px;line-height:1.65;color:rgba(8,55,68,.72)">기다린 만큼 준비했어요.<br>버튼을 눌러 가장 먼저 들어보세요.</div>
+    </div>
+
+    <div onClick="{{ playD }}" style="cursor:pointer;backdrop-filter:blur(12px);background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:52px;height:52px;flex:none;border-radius:50%;background:#083744;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px">{{ dIcon }}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:15px;font-weight:800;color:#083744">음성 특전 듣기</div>
+          <div style="margin-top:3px;font-size:11px;color:rgba(8,55,68,.6)">{{ dStatus }}</div>
+        </div>
+        <div class="mono" style="font-size:10px;color:rgba(8,55,68,.5)">{{ dTime }}</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:30px">
+        <sc-for list="{{ barsD }}" as="b" hint-placeholder-count="22"><div style="flex:1;border-radius:2px;background:rgba(8,55,68,.35);height:{{ b }}"></div></sc-for>
+      </div>
+    </div>
+
+    <div onClick="{{ noop }}" style="cursor:pointer;border-radius:12px;padding:15px 16px;background:#0d3d4f;display:flex;align-items:center;justify-content:space-between" style-hover="background:#12556e">
+      <div style="font-size:14px;font-weight:700;color:#fff">영상 특전 다운로드</div>
+      <div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px">↓</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+      <div style="cursor:pointer;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1/1.1;background:#3f9fc4;transition:background .2s" style-hover="background:#5cb5d6">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">YOUTUBE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">영상<br>보러가기</div>
+        </div>
+      </div>
+      <div style="cursor:pointer;position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1/1.1;background:#4aa87c;transition:background .2s" style-hover="background:#63bd93">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">FANCAFE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">함께<br>이야기해요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:8px 20px 34px;display:flex;flex-direction:column;gap:12px">
+    <div style="text-align:center;font-size:17px;font-weight:900;color:#083744;letter-spacing:-.01em">갤러리</div>
+    <div style="position:relative;height:{{ gBoxH }};overflow:hidden;transition:height .5s cubic-bezier(.22,.61,.36,1)">
+      <div style="display:flex;height:100%;width:1500%;transform:translateX({{ gShiftD }});transition:{{ gTransD }}">
+        <sc-for list="{{ slidesD }}" as="sl" hint-placeholder-count="15">
+          <div style="width:6.6667%;height:100%;display:flex;align-items:center;justify-content:center;box-sizing:border-box">
+            <div class="ph" style="width:{{ sl.w }};height:{{ sl.h }};max-width:100%;max-height:100%;background-color:#e3eff2;border:1px solid rgba(8,55,68,.18)"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div class="mono" style="text-align:center;font-size:12px;letter-spacing:.06em;color:#083744">{{ gLabelD }}</div>
+    <div style="display:flex;justify-content:center;gap:10px">
+      <div onClick="{{ gPrevD }}" style="cursor:pointer;width:38px;height:38px;border-radius:50%;border:1px solid rgba(8,55,68,.2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#083744" style-hover="background:rgba(255,255,255,.7)">‹</div>
+      <div onClick="{{ gNextD }}" style="cursor:pointer;width:38px;height:38px;border-radius:50%;border:1px solid rgba(8,55,68,.2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#083744" style-hover="background:rgba(255,255,255,.7)">›</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<p class="dv-next">다음 시도: "<a class="dv-oid" href="#2a">2a</a>를 PC 접속 화면(좌우 여백 포함)으로" · "히어로 카피를 <a class="dv-oid" href="#1a">1a</a>처럼 담백하게" · "실제 이미지 넣어줄게"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">채빈 특전 랜딩 · 모바일 와이어프레임 3안 (PC에서는 좌우 여백 + 모바일 폭 유지)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>정리형 · 스카이블루 기본 / 담백한 카피</div>
+<div class="dv-card" style="width:390px">
+<div style="background:#f7fafb">
+  <div style="position:relative;height:230px;overflow:hidden;background:linear-gradient(180deg,#dcf0f7 0%,#eaf6f2 100%)">
+    <div class="ph" style="position:absolute;inset:0"></div>
+    <div class="mono" style="position:absolute;bottom:10px;left:14px;font-size:9px;letter-spacing:.04em;color:rgba(0,0,0,.4)">BACKGROUND IMAGE</div>
+    <div style="position:relative;padding:26px 22px 0;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:center;gap:9px">
+        <div style="width:26px;height:26px;border-radius:7px;background:#3aa8cc"></div>
+        <div class="mono" style="font-size:11px;letter-spacing:.14em;color:#0f4f66">CHAEBIN</div>
+      </div>
+      <div>
+        <div style="font-size:27px;font-weight:900;line-height:1.25;color:#0d3d4f;letter-spacing:-.01em">특전 안내</div>
+        <div style="margin-top:7px;font-size:13px;line-height:1.6;color:rgba(13,61,79,.7)">음성·영상 특전과 갤러리를<br>한 곳에서 확인하세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:22px 22px 34px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(0,0,0,.35)">01 &nbsp;VOICE</div>
+      <div onClick="{{ playA }}" style="cursor:pointer;background:#fff;border:1px solid #d6e6ec;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px" style-hover="border-color:#3aa8cc">
+        <div style="width:44px;height:44px;flex:none;border-radius:50%;background:{{ aBtnBg }};display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px">{{ aIcon }}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:700;color:#0d3d4f">음성 특전</div>
+          <div style="margin-top:3px;font-size:11px;color:rgba(13,61,79,.55)">{{ aStatus }}</div>
+        </div>
+        <div style="flex:none;display:flex;align-items:flex-end;gap:2px;height:22px">
+          <sc-for list="{{ bars }}" as="b" hint-placeholder-count="7"><div style="width:3px;border-radius:2px;background:#8fd0e2;height:{{ b }}"></div></sc-for>
+        </div>
+      </div>
+      <div style="height:3px;border-radius:2px;background:#e3eef2;overflow:hidden"><div style="height:100%;width:{{ aProgress }};background:#3aa8cc"></div></div>
+    </div>
+
+    <div onClick="{{ noop }}" style="cursor:pointer;border-radius:14px;padding:15px 16px;background:#0d3d4f;display:flex;align-items:center;justify-content:space-between" style-hover="background:#12556e">
+      <div>
+        <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.5)">02 &nbsp;VIDEO</div>
+        <div style="margin-top:4px;font-size:14px;font-weight:700;color:#fff">영상 특전 다운로드</div>
+      </div>
+      <div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px">↓</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="cursor:pointer;border:1px solid #d6e6ec;border-radius:14px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:26px" style-hover="border-color:#3aa8cc">
+        <div style="width:24px;height:24px;border-radius:7px;background:#e8f4f8"></div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#0d3d4f">유튜브</div>
+          <div class="mono" style="margin-top:3px;font-size:9px;color:rgba(0,0,0,.35)">GO →</div>
+        </div>
+      </div>
+      <div style="cursor:pointer;border:1px solid #d9ebe0;border-radius:14px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:26px" style-hover="border-color:#3faa78">
+        <div style="width:24px;height:24px;border-radius:7px;background:#e6f4ec"></div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#14503a">팬카페</div>
+          <div class="mono" style="margin-top:3px;font-size:9px;color:rgba(0,0,0,.35)">GO →</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between">
+        <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(0,0,0,.35)">03 &nbsp;GALLERY</div>
+        <div class="mono" style="font-size:10px;color:rgba(0,0,0,.4)">{{ gLabelA }}</div>
+      </div>
+      <div style="position:relative;border-radius:14px;overflow:hidden;background:#e9f1f4;aspect-ratio:3/4">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div class="mono" style="position:absolute;left:12px;bottom:12px;font-size:10px;color:rgba(0,0,0,.45)">{{ gCaptionA }}</div>
+        <div onClick="{{ gPrevA }}" style="cursor:pointer;position:absolute;left:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:12px;color:#0d3d4f">‹</div>
+        <div onClick="{{ gNextA }}" style="cursor:pointer;position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;font-size:12px;color:#0d3d4f">›</div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:5px">
+        <sc-for list="{{ dotsA }}" as="d" hint-placeholder-count="5"><div style="width:5px;height:5px;border-radius:50%;background:{{ d }}"></div></sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>이미지 몰입형 · 글래스 카드 / 팬 감성 카피</div>
+<div class="dv-card" style="width:390px">
+<div style="position:relative;background:linear-gradient(165deg,#7fd0e8 0%,#a9e2d5 55%,#e9f6ef 100%)">
+  <div class="ph" style="position:absolute;inset:0;opacity:.7"></div>
+  <div style="position:absolute;left:0;right:0;top:0;height:420px;background:radial-gradient(120% 80% at 20% 0%,rgba(255,255,255,.65),rgba(255,255,255,0))"></div>
+
+  <div style="position:relative;padding:20px 20px 30px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div class="mono" style="font-size:11px;letter-spacing:.18em;color:#0b4356">CHAEBIN</div>
+      <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.55)"></div>
+    </div>
+
+    <div style="padding:34px 0 30px">
+      <div class="mono" style="font-size:9px;letter-spacing:.2em;color:rgba(11,67,86,.6)">SPECIAL BENEFIT</div>
+      <div style="margin-top:10px;font-size:34px;font-weight:900;line-height:1.15;color:#083744;letter-spacing:-.02em">오늘,<br>목소리부터</div>
+      <div style="margin-top:12px;font-size:13px;line-height:1.65;color:rgba(8,55,68,.72)">기다린 만큼 준비했어요.<br>버튼을 눌러 가장 먼저 들어보세요.</div>
+    </div>
+
+    <div onClick="{{ playB }}" style="cursor:pointer;backdrop-filter:blur(12px);background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:52px;height:52px;flex:none;border-radius:50%;background:#083744;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px">{{ bIcon }}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:15px;font-weight:800;color:#083744">음성 특전 듣기</div>
+          <div style="margin-top:3px;font-size:11px;color:rgba(8,55,68,.6)">{{ bStatus }}</div>
+        </div>
+        <div class="mono" style="font-size:10px;color:rgba(8,55,68,.5)">{{ bTime }}</div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:30px">
+        <sc-for list="{{ barsB }}" as="b" hint-placeholder-count="22"><div style="flex:1;border-radius:2px;background:rgba(8,55,68,.35);height:{{ b }}"></div></sc-for>
+      </div>
+    </div>
+
+    <div onClick="{{ noop }}" style="cursor:pointer;border-radius:18px;padding:16px 18px;background:rgba(255,255,255,.85);display:flex;align-items:center;gap:14px" style-hover="background:#fff">
+      <div style="width:38px;height:38px;flex:none;border-radius:12px;background:#0b4356;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px">↓</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:800;color:#083744">영상 특전 저장하기</div>
+        <div style="margin-top:2px;font-size:11px;color:rgba(8,55,68,.55)">MP4 · 소장용 파일</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+      <div style="cursor:pointer;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1/1.1;background:#3f9fc4">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">YOUTUBE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">영상<br>보러가기</div>
+        </div>
+      </div>
+      <div style="cursor:pointer;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1/1.1;background:#4aa87c">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.85)">FANCAFE</div>
+          <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.3">함께<br>이야기해요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;background:#f4faf8;padding:26px 20px 34px;border-radius:26px 26px 0 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between">
+      <div style="font-size:16px;font-weight:900;color:#083744">갤러리</div>
+      <div class="mono" style="font-size:11px;color:rgba(8,55,68,.45)">{{ gLabelB }}</div>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:stretch">
+      <div style="flex:1;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#dceaea">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div class="mono" style="position:absolute;left:12px;bottom:12px;font-size:10px;color:rgba(0,0,0,.45)">{{ gCaptionB }}</div>
+      </div>
+      <div style="width:56px;flex:none;position:relative;border-radius:16px;overflow:hidden;background:#e7f0f0;opacity:.6">
+        <div class="ph" style="position:absolute;inset:0"></div>
+      </div>
+    </div>
+    <div style="margin-top:14px;display:flex;align-items:center;gap:10px">
+      <div onClick="{{ gPrevB }}" style="cursor:pointer;width:36px;height:36px;border-radius:50%;border:1px solid rgba(8,55,68,.18);display:flex;align-items:center;justify-content:center;color:#083744">‹</div>
+      <div onClick="{{ gNextB }}" style="cursor:pointer;width:36px;height:36px;border-radius:50%;border:1px solid rgba(8,55,68,.18);display:flex;align-items:center;justify-content:center;color:#083744">›</div>
+      <div style="flex:1;height:2px;background:rgba(8,55,68,.12);border-radius:2px;overflow:hidden"><div style="height:100%;width:{{ gProgressB }};background:#4aa87c"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>그린 에디토리얼 · 큰 타입 / 공식 안내 톤</div>
+<div class="dv-card" style="width:390px">
+<div style="background:#0f2f26">
+  <div style="padding:20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12)">
+    <div class="mono" style="font-size:10px;letter-spacing:.2em;color:#bdf0d8">CHAEBIN · OFFICIAL</div>
+    <div class="mono" style="font-size:10px;color:rgba(255,255,255,.4)">2026</div>
+  </div>
+
+  <div style="position:relative;height:200px;overflow:hidden;background:#123a2f">
+    <div class="ph" style="position:absolute;inset:0;opacity:.6"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,47,38,.1),rgba(15,47,38,.85))"></div>
+    <div class="mono" style="position:absolute;top:12px;left:14px;font-size:9px;letter-spacing:.04em;color:rgba(255,255,255,.5)">BACKGROUND IMAGE</div>
+    <div style="position:absolute;left:20px;right:20px;bottom:18px">
+      <div style="font-size:30px;font-weight:900;line-height:1.15;color:#fff;letter-spacing:-.02em">특전 안내<br><span style="color:#7fe3c0">VOICE &amp; VIDEO</span></div>
+    </div>
+  </div>
+
+  <div style="padding:24px 20px 34px;background:#f6faf8;display:flex;flex-direction:column;gap:22px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid rgba(15,47,38,.14);padding-bottom:8px">
+        <div class="mono" style="font-size:10px;color:#2f8c6b">01</div>
+        <div style="font-size:15px;font-weight:900;color:#0f2f26">음성 특전</div>
+        <div style="margin-left:auto;font-size:11px;color:rgba(15,47,38,.5)">1분 24초</div>
+      </div>
+      <div onClick="{{ playC }}" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:6px 0">
+        <div style="width:58px;height:58px;flex:none;border-radius:50%;background:#0f2f26;color:#7fe3c0;display:flex;align-items:center;justify-content:center;font-size:17px">{{ cIcon }}</div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:12px;color:rgba(15,47,38,.6)">{{ cStatus }}</div>
+          <div style="height:4px;border-radius:2px;background:rgba(15,47,38,.1);overflow:hidden"><div style="height:100%;width:{{ cProgress }};background:#2f8c6b"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid rgba(15,47,38,.14);padding-bottom:8px">
+        <div class="mono" style="font-size:10px;color:#2f8c6b">02</div>
+        <div style="font-size:15px;font-weight:900;color:#0f2f26">영상 특전</div>
+      </div>
+      <div onClick="{{ noop }}" style="cursor:pointer;border:1.5px solid #0f2f26;border-radius:4px;padding:15px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff" style-hover="background:#0f2f26;color:#fff">
+        <div class="mono" style="font-size:11px;letter-spacing:.14em">DOWNLOAD ↓</div>
+      </div>
+      <div style="font-size:11px;line-height:1.6;color:rgba(15,47,38,.5)">모바일에서는 저장 후 앨범에서 확인해 주세요.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid rgba(15,47,38,.14);padding-bottom:8px">
+        <div class="mono" style="font-size:10px;color:#2f8c6b">03</div>
+        <div style="font-size:15px;font-weight:900;color:#0f2f26">링크</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(15,47,38,.14)">
+        <div style="cursor:pointer;background:#fff;padding:18px 14px;display:flex;flex-direction:column;gap:22px" style-hover="background:#e8f6ef">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:#2f8c6b">YOUTUBE</div>
+          <div style="font-size:14px;font-weight:900;color:#0f2f26">채널 →</div>
+        </div>
+        <div style="cursor:pointer;background:#fff;padding:18px 14px;display:flex;flex-direction:column;gap:22px" style-hover="background:#e6f2fa">
+          <div class="mono" style="font-size:9px;letter-spacing:.14em;color:#2077a3">FANCAFE</div>
+          <div style="font-size:14px;font-weight:900;color:#0f2f26">팬카페 →</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid rgba(15,47,38,.14);padding-bottom:8px">
+        <div class="mono" style="font-size:10px;color:#2f8c6b">04</div>
+        <div style="font-size:15px;font-weight:900;color:#0f2f26">갤러리</div>
+        <div class="mono" style="margin-left:auto;font-size:12px;font-weight:500;color:#0f2f26">{{ gLabelC }}</div>
+      </div>
+      <div style="position:relative;overflow:hidden;background:#e4ede9;aspect-ratio:1/1">
+        <div class="ph" style="position:absolute;inset:0"></div>
+        <div class="mono" style="position:absolute;left:12px;top:12px;font-size:10px;color:rgba(0,0,0,.45)">{{ gCaptionC }}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ thumbsC }}" as="t" hint-placeholder-count="5"><div onClick="{{ t.pick }}" style="cursor:pointer;flex:1;aspect-ratio:1/1;background:#e4ede9;outline:{{ t.ring }};outline-offset:-2px" class="ph"></div></sc-for>
+      </div>
+      <div style="display:flex;gap:8px">
+        <div onClick="{{ gPrevC }}" style="cursor:pointer;flex:1;border:1px solid rgba(15,47,38,.2);padding:10px;text-align:center;font-size:12px;color:#0f2f26">이전</div>
+        <div onClick="{{ gNextC }}" style="cursor:pointer;flex:1;border:1px solid rgba(15,47,38,.2);padding:10px;text-align:center;font-size:12px;color:#0f2f26">다음</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:20px;background:#0f2f26">
+    <div class="mono" style="font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.4)">© CHAEBIN OFFICIAL</div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">다음 시도: "<a class="dv-oid" href="#1b">1b</a>의 배경에 <a class="dv-oid" href="#1a">1a</a>의 섹션 구조로" · "<a class="dv-oid" href="#1c">1c</a>를 스카이블루로" · "선택안을 PC 접속 화면(좌우 여백 포함)으로 보여줘"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360,&quot;height&quot;:1100}}">
+class Component extends DCLogic {
+  state = { pa:false, pb:false, pc:false, pd:false, ga:0, gb:0, gc:0, raw:5, anim:true, t:0 };
+  componentDidMount(){ this.iv = setInterval(()=>this.setState(s=>({t:s.t+1})), 120); }
+  componentWillUnmount(){ clearInterval(this.iv); }
+  scroll3 = React.createRef();
+  floater(src, side, top, w, anim, show){
+    const outer = { position:'absolute', top, [side]:-10, width:w, pointerEvents:'none', zIndex:2, opacity: show ? 1 : 0, transform: show ? 'translateX(0)' : 'translateX(' + (side === 'left' ? '-' : '') + '40px)', transition:'opacity .6s ease, transform .7s cubic-bezier(.22,.61,.36,1)' };
+    return React.createElement('div', { key: src, style: outer }, React.createElement('img', { src, alt:'', style:{ display:'block', width:'100%', height:'auto', animation: anim, filter:'drop-shadow(0 6px 10px rgba(8,55,68,.18))' } }));
+  }
+  caps = ['포스터 A','특전 디자인 01','채빈 사진 01','특전 디자인 02','포스터 B'];
+  ratios = [1624/2290, 1, 0.8, 1.4, 0.75];
+  ratioLabels = ['A4 세로','1:1','4:5','7:5 가로','3:4'];
+  pad(n){ return String(n).padStart(2,'0'); }
+  wave(n, live, amp){
+    const t = this.state.t;
+    return Array.from({length:n}, (_,i) => {
+      const base = 4 + Math.abs(Math.sin(i*0.9)) * amp;
+      const v = live ? 4 + Math.abs(Math.sin(i*0.7 + t*0.35)) * amp : base * 0.55;
+      return Math.round(v) + 'px';
+    });
+  }
+  box(r){
+    let h = Math.min(420, 350 / r);
+    let w = h * r;
+    if (w > 350) { w = 350; h = 350 / r; }
+    return { w: Math.round(w) + 'px', h: Math.round(h) + 'px', area: Math.round(Math.max(300, Math.min(420, h))) + 'px' };
+  }
+  slide(d){
+    const n = this.caps.length;
+    this.setState(s => ({ raw: s.raw + d, anim: true }));
+    clearTimeout(this.snapT);
+    this.snapT = setTimeout(() => {
+      this.setState(s => {
+        if (s.raw >= 2 * n || s.raw < n) return { raw: ((s.raw % n) + n) % n + n, anim: false };
+        return {};
+      });
+      requestAnimationFrame(() => this.setState({ anim: true }));
+    }, 520);
+  }
+  step(key, d){
+    this.setState(s => ({ [key]: (s[key] + d + this.caps.length) % this.caps.length }));
+  }
+  renderVals(){
+    const s = this.state, n = this.caps.length;
+    const accent = c => c;
+    const sh = !!s.scrolled3;
+    return {
+      noop: () => {},
+      onScroll3: e => { const v = e.currentTarget.scrollTop > 40; if (v !== !!this.state.scrolled3) this.setState({ scrolled3: v }); },
+      toTop3: () => { const el = this.scroll3.current; if (el) el.scrollTo({ top: 0, behavior: 'smooth' }); },
+      topOp3: sh ? 1 : 0, topPe3: sh ? 'auto' : 'none', topY3: sh ? '0px' : '12px',
+      floaters3: [this.floater('assets/do1.png', 'left', '22%', 92, 'bobA 3.4s ease-in-out infinite', sh), this.floater('assets/do2.png', 'right', '52%', 80, 'bobB 4.2s ease-in-out infinite', sh)],
+      bars: this.wave(7, s.pa, 18),
+      barsB: this.wave(22, s.pb, 26),
+      playA: () => this.setState({pa:!s.pa}),
+      playB: () => this.setState({pb:!s.pb}),
+      playC: () => this.setState({pc:!s.pc}),
+      aIcon: s.pa ? '❙❙' : '▶', bIcon: s.pb ? '❙❙' : '▶', cIcon: s.pc ? '❙❙' : '▶',
+      aBtnBg: s.pa ? '#0d3d4f' : '#3aa8cc',
+      aStatus: s.pa ? '재생 중 · 01:24' : '탭하여 재생',
+      bStatus: s.pb ? '재생 중입니다' : '지금 들어보세요',
+      cStatus: s.pc ? '재생 중 · 00:32 / 01:24' : '재생 버튼을 눌러주세요',
+      bTime: s.pb ? '00:32' : '01:24',
+      aProgress: s.pa ? '38%' : '0%',
+      cProgress: s.pc ? '38%' : '0%',
+      gLabelA: this.pad(s.ga+1) + '/' + this.pad(n),
+      gLabelB: this.pad(s.gb+1) + '/' + this.pad(n),
+      gLabelC: this.pad(s.gc+1) + '/' + this.pad(n),
+      gCaptionA: this.caps[s.ga], gCaptionB: this.caps[s.gb], gCaptionC: this.caps[s.gc],
+      gProgressB: Math.round((s.gb+1)/n*100) + '%',
+      dotsA: Array.from({length:n}, (_,i) => i === s.ga ? '#0d3d4f' : accent('rgba(13,61,79,.2)')),
+      thumbsC: Array.from({length:n}, (_,i) => ({ ring: i === s.gc ? '2px solid #0f2f26' : '0px solid transparent', pick: () => this.setState({gc:i}) })),
+      playD: () => this.setState({pd:!s.pd}),
+      dIcon: s.pd ? '❙❙' : '▶',
+      dStatus: s.pd ? '재생 중입니다' : '지금 들어보세요',
+      dTime: s.pd ? '00:32' : '01:24',
+      barsD: this.wave(22, s.pd, 26),
+      gLabelD: this.pad((((s.raw % n) + n) % n) + 1) + '/' + this.pad(n),
+      gShiftE: (-(s.raw) * 294) + 'px',
+      gProgressE: Math.round(((((s.raw % n) + n) % n) + 1) / n * 100) + '%',
+      slidesE: Array.from({length: 3 * n}, (_, i) => ({ img: i % n === 0, ph: i % n !== 0, src: 'assets/endless-horizon-poster.png', op: i === s.raw ? 1 : .55 })),
+      gShiftD: (-(s.raw) * (100/15)).toFixed(4) + '%',
+      gTransD: s.anim ? 'transform .5s cubic-bezier(.22,.61,.36,1)' : 'none',
+      gBoxH: this.box(this.ratios[((s.raw % n) + n) % n]).area,
+      slidesD: [0,1,2].flatMap(() => this.ratios.map((r, i) => Object.assign(this.box(r), i === 0 ? { bg: 'url(assets/endless-horizon-poster.png)', bgc: 'transparent', bd: '0px solid transparent' } : { bg: 'repeating-linear-gradient(135deg,rgba(0,0,0,.055) 0 6px,rgba(0,0,0,0) 6px 12px)', bgc: '#e3eff2', bd: '1px solid rgba(8,55,68,.18)' }))),
+      gPrevD: () => this.slide(-1), gNextD: () => this.slide(1),
+      gPrevA: () => this.step('ga',-1), gNextA: () => this.step('ga',1),
+      gPrevB: () => this.step('gb',-1), gNextB: () => this.step('gb',1),
+      gPrevC: () => this.step('gc',-1), gNextC: () => this.step('gc',1)
+    };
+  }
+}
+</script>
+</body>
+</html>

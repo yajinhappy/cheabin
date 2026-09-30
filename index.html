@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>대원 10기 성우 임채빈 데뷔 7주년 특전 페이지</title>
+  <meta name="description" content="대원 10기 성우 임채빈 데뷔 7주년 특전 페이지ㆍ채빈님의 음성 특전과 갤러리를 만나보세요!">
+  <link rel="icon" type="image/x-icon" href="assets/favi.ico">
+  <link rel="shortcut icon" href="assets/favi.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Outer wrapper for PC centering -->
+  <div class="page-shell">
+
+    <!-- Full-page background (continuous, no break) -->
+    <div class="page-bg" aria-hidden="true">
+      <div class="page-bg__poster"></div>
+      <div class="page-bg__gradient"></div>
+    </div>
+
+    <!-- Scroll container -->
+    <div class="page-scroll" id="pageScroll">
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- HERO: KV Title + Content                   -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="hero">
+        <div class="hero__inner">
+          <!-- Top bar -->
+          <header class="topbar">
+            <div class="topbar__logo mono">LIM CHAE BIN</div>
+            <img src="assets/heart.svg" alt="" class="topbar__heart" aria-hidden="true">
+          </header>
+
+          <!-- KV Title — 2 images stacked -->
+          <div class="kv" id="kvSection">
+            <img src="assets/kv-title-1.png" alt="ENDLESS HORIZON" class="kv__title kv__title--1" id="kvTitle1">
+            <img src="assets/kv-title-2.png" alt="대원 10기 성우 임채빈" class="kv__title kv__title--2" id="kvTitle2">
+            <p class="kv__sub">대원 10기 성우 임채빈 데뷔 7주년 특전 페이지</p>
+          </div>
+
+          <!-- ═══════════════════════════════════ -->
+          <!-- AUDIO PLAYER                       -->
+          <!-- ═══════════════════════════════════ -->
+          <div class="glass-card audio-card" id="audioCard">
+            <div class="audio-card__top">
+              <button class="audio-card__play" id="audioPlayBtn" aria-label="재생">
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6,3 20,12 6,21" />
+                </svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="5" y="3" width="4" height="18" />
+                  <rect x="15" y="3" width="4" height="18" />
+                </svg>
+              </button>
+              <div class="audio-card__info">
+                <div class="audio-card__name">채빈님 음성 특전 듣기</div>
+                <div class="audio-card__status" id="audioStatus">PLAY NOW</div>
+              </div>
+              <div class="audio-card__time mono" id="audioTime">01:24</div>
+            </div>
+            <!-- Waveform bars -->
+            <div class="waveform" id="waveform" aria-hidden="true"></div>
+          </div>
+
+          <!-- ═══════════════════════════════════ -->
+          <!-- VIDEO DOWNLOAD                     -->
+          <!-- ═══════════════════════════════════ -->
+          <a href="#" class="download-btn" id="downloadBtn">
+            <span class="download-btn__label">채빈님 음성 특전 다운로드</span>
+            <span class="download-btn__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </span>
+          </a>
+
+          <!-- ═══════════════════════════════════ -->
+          <!-- LINK CARDS (YouTube / Fancafe)      -->
+          <!-- ═══════════════════════════════════ -->
+          <div class="link-grid">
+            <a href="https://www.youtube.com/@%EC%84%B1%EC%9A%B0%EC%9E%84%EC%B1%84%EB%B9%88" target="_blank"
+              rel="noopener noreferrer" class="link-card link-card--yt" id="ytCard">
+              <span class="link-card__tag mono"></span>
+              <img src="assets/youtube.svg" alt="유튜브" class="link-card__logo link-card__logo--yt">
+              <span class="link-card__label">채빈님 유튜브<br>바로가기 →</span>
+            </a>
+            <a href="https://cafe.naver.com/forchaebin" target="_blank" rel="noopener noreferrer"
+              class="link-card link-card--fc" id="fcCard">
+              <span class="link-card__tag mono"></span>
+              <img src="assets/fancafe.png" alt="하늘정원" class="link-card__logo link-card__logo--fc">
+              <span class="link-card__label">임채빈 성우님<br>팬카페 →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- GALLERY SECTION (semi-transparent bg)      -->
+      <!-- ═══════════════════════════════════════════ -->
+      <section class="gallery" id="gallerySection">
+        <div class="gallery__header">
+          <h2 class="gallery__title">Gallery</h2>
+          <span class="gallery__counter mono" id="galleryCounter">01/04</span>
+        </div>
+
+        <div class="gallery__viewport" id="galleryViewport">
+          <div class="gallery__track" id="galleryTrack">
+            <!-- Slides injected by JS -->
+          </div>
+        </div>
+
+        <div class="gallery__controls">
+          <button class="gallery__arrow" id="galleryPrev" aria-label="이전">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+          <button class="gallery__arrow" id="galleryNext" aria-label="다음">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+          </button>
+          <div class="gallery__progress">
+            <div class="gallery__progress-fill" id="galleryProgress"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- FOOTER                                     -->
+      <!-- ═══════════════════════════════════════════ -->
+      <footer class="site-footer">
+        <div class="site-footer__inner">
+          <span class="mono">© LIM CHAEBIN</span>
+          <span class="mono">ENDLESS HORIZON · 2026</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- Floating side characters (chaebin 1, 2, 3) -->
+    <!-- ═══════════════════════════════════ -->
+    <aside class="side-floaters" id="sideFloaters" aria-hidden="true">
+      <div class="floater floater--1" id="floater1" title="임채빈">
+        <img src="assets/chaebin1.png" alt="파티 모자 채빈" draggable="false">
+      </div>
+      <div class="floater floater--2" id="floater2" title="임채빈">
+        <img src="assets/chaebin2.png" alt="윙크 채빈" draggable="false">
+      </div>
+      <div class="floater floater--3" id="floater3" title="임채빈">
+        <img src="assets/chaebin3.png" alt="꽃잎 채빈" draggable="false">
+      </div>
+    </aside>
+
+    <!-- Scroll-to-top -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="맨 위로">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+      <span class="mono">TOP</span>
+    </button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
