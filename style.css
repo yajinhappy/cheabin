@@ -579,6 +579,7 @@ img {
   background: var(--color-surface-gallery);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  border-radius: 24px 24px 0 0;
   padding: 28px 20px 36px;
 }
 
