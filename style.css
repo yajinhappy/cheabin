@@ -527,6 +527,15 @@ img {
   background: linear-gradient(135deg, #70d6ef 0%, #58b2cd 100%);
 }
 
+.link-card--ig {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+
+.link-card--x {
+  background: linear-gradient(135deg, #26292d 0%, #151618 50%, #0a0b0c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .link-card__logo {
   position: absolute;
   top: 38%;
@@ -546,6 +555,18 @@ img {
 
 .link-card__logo--fc {
   filter: drop-shadow(0 2px 8px rgba(8, 55, 68, 0.16));
+}
+
+.link-card__logo--ig {
+  width: 48px;
+  max-height: 48px;
+  filter: drop-shadow(0 2px 8px rgba(50, 10, 35, 0.35));
+}
+
+.link-card__logo--x {
+  width: 44px;
+  max-height: 44px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
 }
 
 .link-card__tag {
@@ -568,6 +589,32 @@ img {
   font-weight: 800;
   color: #fff;
   line-height: 1.3;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.link-card__label-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-card__arrow {
+  flex-shrink: 0;
+  margin-left: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+}
+
+.link-card:hover .link-card__arrow {
+  transform: translateX(3px);
 }
 
 /* ═══════════════════════════════════════════
@@ -760,10 +807,10 @@ img {
 }
 
 /* Mobile base positioning — inward (pure horizontal slide-in, no Y offset) */
-/* 1: 키비주얼 메인 타이틀 바로 밑 (좌측 빨간 화살표 위치) */
+/* 1: 키비주얼 메인 타이틀 하단 (좌측 빨간 화살표 위치) */
 .floater--1 {
   left: 10px;
-  top: 125px;
+  top: 115px;
   width: 68px;
   transform: translateX(-35px);
 }
@@ -794,10 +841,10 @@ img {
   animation: floatB 4.4s ease-in-out 0.4s infinite;
 }
 
-/* 3: 갤러리 중간-하단쪽 (좌측) — 10px 위로 올림 & 순수 수평 슬라이드 */
+/* 3: 갤러리 중간-하단쪽 (좌측) — 순수 수평 슬라이드 */
 .floater--3 {
   left: 10px;
-  top: 1030px;
+  top: 1010px;
   width: 64px;
   transform: translateX(-35px);
 }
@@ -818,16 +865,14 @@ img {
   position: absolute;
   right: 16px;
   bottom: 20px;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--color-deep-90);
   color: #fff;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
   box-shadow: 0 4px 18px rgba(8, 55, 68, 0.3);
   opacity: 0;
   pointer-events: none;
@@ -836,15 +881,11 @@ img {
   z-index: 20;
 }
 
-.scroll-top svg {
+.scroll-top__icon {
   width: 16px;
   height: 16px;
-}
-
-.scroll-top span {
-  font-size: 7px;
-  letter-spacing: 0.08em;
-  line-height: 1;
+  display: block;
+  pointer-events: none;
 }
 
 .scroll-top:hover {
@@ -1033,5 +1074,13 @@ img {
   .gallery__slide img {
     height: 340px;
     width: auto;
+  }
+
+  .link-card {
+    padding: 10px 10px 12px;
+  }
+
+  .link-card__label {
+    font-size: 13px;
   }
 }

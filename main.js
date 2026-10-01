@@ -300,14 +300,18 @@
     const gallery = $('#gallerySection');
     const controls = $('.gallery__controls');
 
-    // 1: 키비주얼 메인 타이틀(ENDLESS HORIZON) 바로 밑 (빨간 화살표 위치)
+    // 1: 키비주얼 메인 타이틀(ENDLESS HORIZON) 하단 밑줄 라인 (빨간 화살표 위치)
     if (floater1) {
+      const kvTitle2 = $('#kvTitle2');
       const kvTitle1 = $('#kvTitle1');
-      if (kv && kvTitle1 && kvTitle1.offsetHeight > 20) {
+      if (kv && kvTitle2 && kvTitle2.offsetHeight > 20) {
+        const top1 = kv.offsetTop + kvTitle2.offsetTop + kvTitle2.offsetHeight - 110;
+        floater1.style.top = `${top1}px`;
+      } else if (kv && kvTitle1 && kvTitle1.offsetHeight > 20) {
         const top1 = kv.offsetTop + kvTitle1.offsetTop + kvTitle1.offsetHeight - 5;
         floater1.style.top = `${top1}px`;
       } else {
-        floater1.style.top = '125px';
+        floater1.style.top = '115px';
       }
     }
 
@@ -320,13 +324,13 @@
       }
     }
 
-    // 3: 갤러리 중간-하단쪽 (기존보다 10px 더 위로)
+    // 3: 갤러리 중간-하단쪽 (컨트롤 버튼 위로 20px 추가 상향)
     if (floater3 && gallery) {
       if (controls) {
-        const top3 = gallery.offsetTop + controls.offsetTop - 35;
+        const top3 = gallery.offsetTop + controls.offsetTop - 55;
         floater3.style.top = `${top3}px`;
       } else {
-        const top3 = gallery.offsetTop + gallery.offsetHeight * 0.62;
+        const top3 = gallery.offsetTop + gallery.offsetHeight * 0.62 - 20;
         floater3.style.top = `${top3}px`;
       }
     }
@@ -370,7 +374,7 @@
 
       // 3. 세번째 이미지: 갤러리 중간-하단쪽 (옆으로만 슥- 등장)
       if (floater3) {
-        const top3 = floater3.offsetTop || 1030;
+        const top3 = floater3.offsetTop || 1010;
         const show3 = (scrollY + vh > top3 + 40);
         floater3.classList.toggle('is-visible', show3);
       }
