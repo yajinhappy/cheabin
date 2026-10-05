@@ -454,6 +454,11 @@ img {
   animation: fadeSlideUp 0.8s var(--ease-out) 0.7s both;
 }
 
+/* 재생바 ↔ 다운로드 버튼 간격 10px — SNS 카드 간격(.link-grid gap)과 동일 (부모 gap 16px - 6px) */
+.audio-card + .download-btn {
+  margin-top: -6px;
+}
+
 .download-btn:hover {
   background: #12556e;
   transform: translateY(-1px);

@@ -1,10 +1,18 @@
 /**
  * Chaebin Landing — ENDLESS HORIZON
  * Main JavaScript: Audio player, gallery carousel, scroll effects
+ * Created by BB
  */
 
 (function () {
   'use strict';
+
+  // Creator signature (개발자도구 콘솔에 표시)
+  console.log(
+    '%c ENDLESS HORIZON %c Created by BB ',
+    'background:#083744;color:#fff;font-weight:700;padding:4px 8px;border-radius:4px 0 0 4px;',
+    'background:#3f9fc4;color:#fff;font-weight:700;padding:4px 8px;border-radius:0 4px 4px 0;'
+  );
 
   /* ═══════════════════════════════════════════
      DOM REFERENCES
@@ -64,26 +72,88 @@
 
   /* ═══════════════════════════════════════════
      AUDIO PLAYER STATE
+     - 재생: jsDelivr CDN(트래픽 분산) 우선, 실패 시 로컬 파일로 자동 전환
+     - 로컬 개발 환경(localhost/file)에서는 로컬 파일 우선
      ═══════════════════════════════════════════ */
+  const AUDIO_FILE = 'assets/chaebin_voice_msg.mp3';
+  const AUDIO_CDN = 'https://cdn.jsdelivr.net/gh/yajinhappy/cheabin@main/' + AUDIO_FILE;
+  const isLocalDev = location.protocol === 'file:' ||
+    /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  const audioSources = isLocalDev ? [AUDIO_FILE, AUDIO_CDN] : [AUDIO_CDN, AUDIO_FILE];
+  let audioSourceIdx = 0;
+
+  const voiceAudio = $('#voiceAudio');
+  const idleStatusText = audioStatus.textContent;
+
   let isPlaying = false;
   let waveAnimFrame = null;
   let waveTime = 0;
 
-  function toggleAudio() {
-    isPlaying = !isPlaying;
-    audioCard.classList.toggle('is-playing', isPlaying);
+  function formatTime(sec) {
+    if (!isFinite(sec) || sec < 0) return '--:--';
+    const s = Math.floor(sec);
+    return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
 
-    if (isPlaying) {
+  function showDuration() {
+    audioTime.textContent = formatTime(voiceAudio.duration);
+  }
+
+  function setPlayingUI(playing) {
+    isPlaying = playing;
+    audioCard.classList.toggle('is-playing', playing);
+    audioPlayBtn.setAttribute('aria-label', playing ? '일시정지' : '재생');
+
+    if (playing) {
       audioStatus.textContent = '재생 중입니다';
-      audioTime.textContent = '00:32';
+      cancelAnimationFrame(waveAnimFrame);
       animateWave();
     } else {
-      audioStatus.textContent = '지금 들어보세요';
-      audioTime.textContent = '01:24';
+      audioStatus.textContent = idleStatusText;
       cancelAnimationFrame(waveAnimFrame);
       resetWave();
     }
   }
+
+  function toggleAudio() {
+    if (voiceAudio.paused) {
+      const p = voiceAudio.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => setPlayingUI(false));
+      }
+    } else {
+      voiceAudio.pause();
+    }
+  }
+
+  // 오디오 이벤트 → UI 동기화
+  voiceAudio.addEventListener('play', () => setPlayingUI(true));
+  voiceAudio.addEventListener('pause', () => setPlayingUI(false));
+  voiceAudio.addEventListener('loadedmetadata', showDuration);
+  voiceAudio.addEventListener('timeupdate', () => {
+    if (isPlaying) audioTime.textContent = formatTime(voiceAudio.currentTime);
+  });
+  voiceAudio.addEventListener('ended', () => {
+    voiceAudio.currentTime = 0;
+    setPlayingUI(false);
+    showDuration();
+  });
+
+  // CDN 실패 시 다음 소스(로컬 파일)로 자동 전환
+  voiceAudio.addEventListener('error', () => {
+    if (audioSourceIdx < audioSources.length - 1) {
+      const wasPlaying = isPlaying;
+      audioSourceIdx++;
+      voiceAudio.src = audioSources[audioSourceIdx];
+      voiceAudio.load();
+      if (wasPlaying) voiceAudio.play().catch(() => setPlayingUI(false));
+    } else {
+      setPlayingUI(false);
+      audioStatus.textContent = '재생할 수 없습니다';
+    }
+  });
+
+  voiceAudio.src = audioSources[audioSourceIdx];
 
   function animateWave() {
     waveTime += 0.03; // 기존(0.06) 대비 0.5배 속도로 감속
@@ -114,15 +184,56 @@
   });
 
   /* ═══════════════════════════════════════════
-     DOWNLOAD BUTTON — Ripple effect
+     DOWNLOAD BUTTON — Ripple effect + 강제 다운로드
+     파일을 Blob으로 받아 저장 → 서버/브라우저 환경과 무관하게
+     재생 화면으로 열리지 않고 바로 로컬에 저장됨
+     (내 사이트 파일 우선, 실패 시 CDN, 모두 실패 시 링크 이동)
      ═══════════════════════════════════════════ */
-  downloadBtn.addEventListener('click', (e) => {
+  const DOWNLOAD_NAME = 'chaebin_voice_msg.mp3';
+  let isDownloading = false;
+
+  async function fetchAudioBlob() {
+    for (const url of [AUDIO_FILE, AUDIO_CDN]) {
+      try {
+        const res = await fetch(url);
+        if (res.ok) return await res.blob();
+      } catch (_) { /* 다음 소스 시도 */ }
+    }
+    throw new Error('download failed');
+  }
+
+  function saveBlob(blob, filename) {
+    const url = URL.createObjectURL(new Blob([blob], { type: 'audio/mpeg' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  }
+
+  downloadBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     // Add a brief scale feedback
     downloadBtn.style.transform = 'scale(0.96)';
     setTimeout(() => {
       downloadBtn.style.transform = '';
     }, 150);
+
+    if (isDownloading) return;
+    if (!window.confirm('채빈님 음성 특전을 다운로드 하시겠습니까?')) return;
+
+    isDownloading = true;
+    try {
+      saveBlob(await fetchAudioBlob(), DOWNLOAD_NAME);
+    } catch (_) {
+      // 링크 이동(재생 화면으로 열림) 대신 안내만 표시
+      window.alert('다운로드에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      isDownloading = false;
+    }
   });
 
   /* ═══════════════════════════════════════════

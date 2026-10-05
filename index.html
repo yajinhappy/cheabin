@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+<!--
+  대원 10기 성우 임채빈 데뷔 7주년 특전 페이지 — ENDLESS HORIZON
+  Created by BB
+-->
 <html lang="ko">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>대원 10기 성우 임채빈 데뷔 7주년 특전 페이지</title>
+  <meta name="author" content="BB">
   <meta name="description" content="대원 10기 성우 임채빈 데뷔 7주년 특전 페이지ㆍ채빈님의 음성 특전과 갤러리를 만나보세요!">
 
   <!-- Open Graph / Kakao / Facebook -->
@@ -82,16 +87,19 @@
                 <div class="audio-card__name">채빈님 음성 특전 듣기</div>
                 <div class="audio-card__status" id="audioStatus">PLAY NOW</div>
               </div>
-              <div class="audio-card__time mono" id="audioTime">01:24</div>
+              <div class="audio-card__time mono" id="audioTime">--:--</div>
             </div>
             <!-- Waveform bars -->
             <div class="waveform" id="waveform" aria-hidden="true"></div>
+            <!-- 재생용 오디오: src는 main.js에서 지정 (jsDelivr CDN 우선, 실패 시 로컬 파일) -->
+            <audio id="voiceAudio" preload="metadata" hidden></audio>
           </div>
 
           <!-- ═══════════════════════════════════ -->
           <!-- VIDEO DOWNLOAD                     -->
           <!-- ═══════════════════════════════════ -->
-          <a href="#" class="download-btn" id="downloadBtn">
+          <a href="assets/chaebin_voice_msg.mp3?download=1" download="chaebin_voice_msg.mp3" class="download-btn"
+            id="downloadBtn">
             <span class="download-btn__label">채빈님 음성 특전 다운로드</span>
             <span class="download-btn__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
@@ -209,7 +217,7 @@
     </button>
   </div>
 
-  <script src="main.js"></script>
+  <script src="main.js?v=20261006"></script>
 </body>
 
 </html>
