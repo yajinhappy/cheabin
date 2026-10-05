@@ -49,6 +49,7 @@
     { type: 'image', src: 'assets/gallery/2.png', alt: '특전 갤러리 02' },
     { type: 'image', src: 'assets/gallery/3.png', alt: '특전 갤러리 03' },
     { type: 'image', src: 'assets/gallery/4.png', alt: '특전 갤러리 04' },
+    { type: 'image', src: 'assets/gallery/5.png', alt: '특전 갤러리 05' },
   ];
 
   /* ═══════════════════════════════════════════
