@@ -22,6 +22,7 @@ const server = http.createServer((req, res) => {
   const [rawPath, query = ''] = req.url.split('?');
   let reqPath = decodeURIComponent(rawPath);
   if (reqPath === '/') reqPath = '/index.html';
+  if (reqPath === '/favicon.ico') reqPath = '/assets/favi/favicon.ico';
   const filePath = path.join(__dirname, reqPath);
 
   fs.stat(filePath, (err, stats) => {
