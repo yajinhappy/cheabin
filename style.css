@@ -96,8 +96,8 @@
   --glass-border: rgba(255, 255, 255, 0.7);
   --glass-blur: 12px;
 
-  --font-sans: 'Paperlogy', system-ui, -apple-system, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+  --font-sans: 'Paperlogy', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Noto Sans KR', sans-serif;
 
   --mobile-max: 430px;
   --radius-sm: 8px;
@@ -255,6 +255,7 @@ img {
 
 .topbar__logo {
   font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   color: #fff;
   text-shadow: 0 1px 6px rgba(0, 60, 110, 0.3);
