@@ -1134,7 +1134,7 @@ img {
 
 .bg-opt__text {
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.55;
   word-break: keep-all;
   overflow-wrap: anywhere;
@@ -1143,11 +1143,10 @@ img {
 }
 
 .bg-opt--pick .bg-opt__text {
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .bg-opt--rest .bg-opt__text {
-  font-size: 14px;
   font-weight: 400;
 }
 
@@ -1661,12 +1660,9 @@ img {
 /* Very small screens */
 @media (max-width: 360px) {
   .bg-opt__text {
-    font-size: 14px;
-  }
-
-  .bg-opt--rest .bg-opt__text {
     font-size: 13px;
   }
+
   .hero__inner {
     padding: 16px 16px 0;
     gap: 12px;
