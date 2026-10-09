@@ -738,7 +738,19 @@
       scrollTopBtn.classList.toggle('is-visible', showTop);
 
       // Sticky tabs — 상단에 붙으면 배경 강화
-      if (tabsEl) tabsEl.classList.toggle('is-stuck', scrollY >= tabsNaturalTop() - 1);
+      const tabsStuck = !!tabsEl && scrollY >= tabsNaturalTop() - 1;
+      if (tabsEl) tabsEl.classList.toggle('is-stuck', tabsStuck);
+
+      // 모바일: 상단에 붙은 탭 위로 캐릭터가 겹치지 않게 탭 바 아래로 잘라서 숨김
+      if (sideFloaters) {
+        if (tabsStuck && window.innerWidth < 768) {
+          const trackBottom = tabsEl.querySelector('.tabs__track').getBoundingClientRect().bottom;
+          const clipTop = trackBottom - sideFloaters.parentElement.getBoundingClientRect().top + scrollY;
+          sideFloaters.style.clipPath = `inset(${clipTop}px -999px -99999px -999px)`;
+        } else {
+          sideFloaters.style.clipPath = '';
+        }
+      }
 
       updateBalanceJump();
 
