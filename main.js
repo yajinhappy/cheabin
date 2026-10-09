@@ -473,11 +473,11 @@
       }
     }
 
-    // 밸런스 탭: 2 → 'OOPS' 챕터, 3 → 'LIFE' 챕터 옆 (PC 전용, 모바일은 CSS로 숨김)
+    // 밸런스 탭: 2 → 'OFF MIC' 챕터, 3 → 'CHOICE' 챕터 옆
     if (isBalanceTab) {
       const section = $('#balanceSection');
-      const ch2 = $('#bgChapter-oops');
-      const ch4 = $('#bgChapter-life');
+      const ch2 = $('#bgChapter-offmic');
+      const ch4 = $('#bgChapter-choice');
       if (floater2 && section && ch2) floater2.style.top = `${section.offsetTop + ch2.offsetTop - 20}px`;
       if (floater3 && section && ch4) floater3.style.top = `${section.offsetTop + ch4.offsetTop - 40}px`;
       return;

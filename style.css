@@ -1708,11 +1708,3 @@ img {
     font-size: 13px;
   }
 }
-
-/* 밸런스 탭 (모바일): 카드 텍스트를 가리지 않도록 플로터 2·3 숨김 — PC에선 프레임 바깥이라 유지 */
-@media (max-width: 767px) {
-  .page-shell[data-tab="balance"] .floater--2,
-  .page-shell[data-tab="balance"] .floater--3 {
-    display: none;
-  }
-}
