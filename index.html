@@ -73,7 +73,31 @@
             <img src="assets/kv-title-2.svg" alt="대원 10기 성우 임채빈" class="kv__title kv__title--2" id="kvTitle2">
             <p class="kv__sub">대원 10기 성우 임채빈 데뷔 7주년 특전 페이지</p>
           </div>
+        </div>
+      </section>
 
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- TABS: 음성 특전 / 밸런스 게임 (sticky)       -->
+      <!-- ═══════════════════════════════════════════ -->
+      <nav class="tabs" id="pageTabs" aria-label="페이지 탭">
+        <div class="tabs__track" role="tablist">
+          <span class="tabs__indicator" aria-hidden="true"></span>
+          <button class="tabs__btn is-active" id="tabVoice" role="tab" aria-selected="true" aria-controls="panelVoice"
+            data-tab="voice"><svg class="tabs__star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" />
+            </svg><span>음성 특전</span></button>
+          <button class="tabs__btn" id="tabBalance" role="tab" aria-selected="false" aria-controls="panelBalance"
+            data-tab="balance" tabindex="-1"><svg class="tabs__star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" />
+            </svg><span>밸런스 게임</span></button>
+        </div>
+      </nav>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- TAB 1: 음성 특전 ~ 갤러리                    -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="tab-panel" id="panelVoice" role="tabpanel" aria-labelledby="tabVoice">
+        <div class="hero__body">
           <!-- ═══════════════════════════════════ -->
           <!-- AUDIO PLAYER                       -->
           <!-- ═══════════════════════════════════ -->
@@ -156,7 +180,6 @@
             </a>
           </div>
         </div>
-      </section>
 
       <!-- ═══════════════════════════════════════════ -->
       <!-- GALLERY SECTION (semi-transparent bg)      -->
@@ -189,6 +212,35 @@
           </div>
         </div>
       </section>
+      </div>
+
+      <!-- ═══════════════════════════════════════════ -->
+      <!-- TAB 2: 밸런스 게임 (카드는 main.js에서 렌더) -->
+      <!-- ═══════════════════════════════════════════ -->
+      <div class="tab-panel" id="panelBalance" role="tabpanel" aria-labelledby="tabBalance" hidden>
+        <section class="balance" id="balanceSection">
+          <header class="balance__header">
+            <span class="balance__eyebrow mono">CHAEBIN'S CHOICE</span>
+            <h2 class="balance__title">Balance Game</h2>
+            <p class="balance__desc">둘 중 하나만 고른다면? 채빈님이 직접 고른 16가지 선택</p>
+            <div class="balance__legend">
+              <span class="bg-pick bg-pick--static">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9.5" />
+                  <path d="M8 12.5l2.6 2.6L16 9.6" />
+                </svg>
+              </span>
+              <span class="balance__legend-text">표시가 채빈님의 선택이에요</span>
+            </div>
+            <!-- 챕터 바로가기 (버튼은 main.js에서 렌더) -->
+            <nav class="bg-jump" id="balanceJump" aria-label="챕터 바로가기"></nav>
+          </header>
+          <div class="balance__list" id="balanceList">
+            <!-- Chapters + cards injected by JS -->
+          </div>
+        </section>
+      </div>
 
       <!-- ═══════════════════════════════════════════ -->
       <!-- FOOTER                                     -->
@@ -222,7 +274,7 @@
     </button>
   </div>
 
-  <script src="main.js?v=20261006_2"></script>
+  <script src="main.js?v=20261009_5"></script>
 </body>
 
 </html>

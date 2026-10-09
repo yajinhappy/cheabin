@@ -53,6 +53,51 @@
   ];
 
   /* ═══════════════════════════════════════════
+     BALANCE GAME DATA
+     - pick: 채빈님이 고른 쪽 ('A' | 'B')
+     - extra: 추가 답변 (말풍선으로 표시)
+     ═══════════════════════════════════════════ */
+  const BALANCE_ICONS = {
+    mic: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/>',
+    oops: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/>',
+    daily: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2"/><path d="M10 2v2"/><path d="M14 2v2"/>',
+    life: '<path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2Z"/><path d="M19 17v4"/><path d="M17 19h4"/>',
+  };
+
+  // items: BALANCE_ITEMS의 원래 질문 번호(1부터). 4·12·13·17번은 노출 안 함 → 총 16장
+  const BALANCE_CHAPTERS = [
+    { id: 'onmic', icon: 'mic', label: 'ON MIC', title: '성우 편', items: [1, 2, 3, 5, 6, 7] },
+    { id: 'offmic', icon: 'daily', label: 'OFF MIC', title: '일상 편', items: [8, 9, 10, 11, 14, 15, 16, 18] },
+    { id: 'choice', icon: 'life', label: 'CHOICE', title: '인생 편', items: [19, 20] },
+  ];
+
+  const BALANCE_ITEMS = [
+    { a: '대본 받았는데 내 대사가 전부 어려운 한자어+전문용어 투성이라 발음 꼬이기 일보 직전', b: '대본 받았는데 대사는 몇 줄 없고 지문에 은유적인 표현의 난해한 감정 연기만 가득 적혀있기', pick: 'B' },
+    { a: '평소 내 목소리랑 100% 똑같아서 연기하기 편하지만 왠지 내 본모습 다 들키는 것 같은 배역', b: '나와 성격이랑 톤이 180도 완전히 달라서 변조 엄청 들어가고 연기하기 왕왕 힘든데 희열 넘치는 배역', pick: 'B' },
+    { a: '인생 최고의 레전드 명연기를 펼쳤는데 마이크 세팅 오류로 녹음 안 되서 처음부터 다시 하기', b: '30번 이상 계속 같은 단어에서 발음 꼬여서 부스 밖 PD님, 다른 연기자들과 어색한 눈빛 교환하기', pick: 'A' },
+    { a: '녹음 시간 15분 전인데 만차+복잡한 지하 주차장 안에서 길 잃고 뱅뱅 돌기', b: '고속도로 진출로 놓쳐서 강제로 30km짜리 드라이브 투어 다녀오기', pick: 'B' },
+    { a: '한 캐릭터로 10년 이상 연기하기', b: '10 캐릭터로 1년마다 연기하기', pick: 'B' },
+    {
+      a: '내가 연기한 캐릭터로 하루 살기', b: '내가 원하는 캐릭터 하나 만들기', pick: 'A',
+      extra: { q: '되고 싶은 캐릭터는?', name: '호크스', text: '자유롭게 날아다니고 싶습니다!', wings: true },
+    },
+    { a: '10인 레이드 던전에서 나머지 파티원 9명의 모든 기합 소리와 피격 보이스를 혼자서 톤 바꿔가며 원맨쇼로 혼자 더빙하기', b: '판타지 오디오북 전체를 지문 하나없이 오직 극단적으로 혀 짧은 3세 유아 퇴행 톤으로 사람들 앞에서 완독하기', pick: 'A' },
+    { a: '지하철에서 실수로 내 흑역사 영상 최대 볼륨으로 10초 동안 재생하기', b: '홍대에서 길 가다 폰 보면서 걷다가 다리 걸려서 넘어지고 혼자 멋쩍게 웃기', pick: 'B' },
+    { a: '내 모든 메신저 내용이 10년 동안 공개됨', b: '내 휴대폰/인터넷 검색 기록이 1년동안 공개됨', pick: 'B' },
+    { a: '내 흑역사 사진/영상을 갤러리에 소중히 백업해 두고 심심할 때마다 단톡방에 푸는 친구', b: '내 비밀을 눈치채고 혼자 입이 근질근질해서 온 몸으로 티내는 친구', pick: 'A' },
+    { a: '아무거나 다 좋아! 해놓고 내가 고르는 것마다 그건 좀 별론데? 하는 친구', b: '만나기 3주 전부터 분 단위로 식당, 카페, 관광지 동선 엑셀로 짜오고 계획한대로 다 움직여야 하는 친구', pick: 'B' },
+    { a: '휴대폰 배터리가 10%밖에 안 남았는데 충전기 두고 나오기', b: '충전기는 챙겼는데 정작 충전할 콘센트가 없는 곳에 있기', pick: 'B' },
+    { a: '냉장고를 열었는데 먹고 싶은 게 하나도 없어서 한참 고민하기', b: '먹고 싶은 게 있어서 냉장고를 열었는데 그게 이미 누가 먹어서 없어져 있기', pick: 'B' },
+    { a: '침대에 폭신하게 누워서 막 잠들려는데 거실에 불 켜져있는 거 발견하기', b: '침대에 완벽하게 자리 잡았는데 거실에 있는 폰 충전 까먹어서 다시 일어나기', pick: 'B' },
+    { a: '쇼츠 하나만 보고 자려고 했는데 정신 차리고보니 새벽 3시', b: '일찍 자려고 휴대폰을 내려놨는데 오히려 잠이 안 와서 한참 뒤척이기', pick: 'A' },
+    { a: '집 나서자마자 비가 쏟아지는데 우산이 없음', b: '우산을 챙겼는데 집에 도착하자마자 비가 그침', pick: 'B' },
+    { a: '집 청소를 시작했는데 갑자기 오래된 물건 발견해서 추억에 잠기기', b: '정리하다가 물건 하나 버릴지 말지 고민하다가 결국 다시 넣기', pick: 'A' },
+    { a: '외출하려고 옷까지 다 입었는데 갑자기 나가기 싫어져서 약속을 취소하고 싶어지기', b: '집에서 편하게 쉬고 있었는데 갑자기 약속이 생겨서 귀찮지만 결국 나가기', pick: 'B' },
+    { a: '내 외모는 지금보다 30% 좋아지지만 지능은 10% 떨어짐', b: '지능이 30% 좋아지지만 외모가 10% 떨어짐', pick: 'A' },
+    { a: '내 인생에서 가장 후회하는 선택을 되돌릴 수 있음 대신 지금 가진 하나를 랜덤으로 잃음', b: '과거는 그대로지만 앞으로의 인생에서 절대 후회할 선택을 하지 않음', pick: 'B' },
+  ];
+
+  /* ═══════════════════════════════════════════
      WAVEFORM SETUP
      ═══════════════════════════════════════════ */
   const BAR_COUNT = 28;
@@ -411,6 +456,7 @@
     const downloadBtn = $('#downloadBtn');
     const gallery = $('#gallerySection');
     const controls = $('.gallery__controls');
+    const isBalanceTab = activeTab === 'balance';
 
     // 1: 키비주얼 메인 타이틀(ENDLESS HORIZON) 하단 밑줄 라인 (빨간 화살표 위치)
     if (floater1) {
@@ -425,6 +471,16 @@
       } else {
         floater1.style.top = '115px';
       }
+    }
+
+    // 밸런스 탭: 2 → 'OOPS' 챕터, 3 → 'LIFE' 챕터 옆 (PC 전용, 모바일은 CSS로 숨김)
+    if (isBalanceTab) {
+      const section = $('#balanceSection');
+      const ch2 = $('#bgChapter-oops');
+      const ch4 = $('#bgChapter-life');
+      if (floater2 && section && ch2) floater2.style.top = `${section.offsetTop + ch2.offsetTop - 20}px`;
+      if (floater3 && section && ch4) floater3.style.top = `${section.offsetTop + ch4.offsetTop - 40}px`;
+      return;
     }
 
     // 2: 음성특전 아래쪽 (다운로드 버튼 바로 아래)
@@ -449,6 +505,223 @@
   }
 
   /* ═══════════════════════════════════════════
+     BALANCE GAME — 렌더링 + 등장 연출
+     카드 등장(is-in) → 0.42초 뒤 고른 쪽 공개(is-picked)
+     ═══════════════════════════════════════════ */
+  const PICK_BADGE =
+    '<span class="bg-pick" role="img" aria-label="채빈 PICK">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<circle cx="12" cy="12" r="9.5"/><path d="M8 12.5l2.6 2.6L16 9.6"/></svg></span>';
+
+  function escapeHTML(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[c]));
+  }
+
+  function pad2(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function renderOption(letter, text, isPick, extra) {
+    let comment = '';
+    if (isPick && extra) {
+      const wings = extra.wings ? ' <span class="bg-wing">🪽</span><span class="bg-wing">🪽</span>' : '';
+      comment =
+        '<div class="bg-comment">' +
+        `<div class="bg-comment__q">💬 ${escapeHTML(extra.q)}</div>` +
+        `<span class="bg-comment__name">${escapeHTML(extra.name)}</span>` +
+        `<p class="bg-comment__text">${escapeHTML(extra.text)}${wings}</p>` +
+        '</div>';
+    }
+    return (
+      `<div class="bg-opt ${isPick ? 'bg-opt--pick' : 'bg-opt--rest'}">` +
+      '<div class="bg-opt__head">' +
+      `<span class="bg-opt__letter">${letter}</span>` +
+      (isPick ? PICK_BADGE : '') +
+      '</div>' +
+      `<p class="bg-opt__text">${escapeHTML(text)}</p>` +
+      comment +
+      '</div>'
+    );
+  }
+
+  /* 챕터 바로가기 — sticky 탭 높이만큼 띄워서 스크롤, 현재 챕터에 체크 표시 */
+  const JUMP_CHECK =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  function chapterScrollTop(chapter) {
+    const tabsH = tabsEl ? tabsEl.offsetHeight : 0;
+    return (
+      chapter.getBoundingClientRect().top -
+      pageScroll.getBoundingClientRect().top +
+      pageScroll.scrollTop -
+      tabsH -
+      8
+    );
+  }
+
+  function renderBalanceJump() {
+    const nav = $('#balanceJump');
+    if (!nav) return;
+    nav.innerHTML = BALANCE_CHAPTERS.map(
+      (ch) =>
+        `<button type="button" class="bg-jump__btn" data-chapter="${ch.id}">${JUMP_CHECK}${ch.title}</button>`
+    ).join('');
+    nav.addEventListener('click', (e) => {
+      const btn = e.target.closest('.bg-jump__btn');
+      const chapter = btn && document.getElementById(`bgChapter-${btn.dataset.chapter}`);
+      if (!chapter) return;
+      pageScroll.scrollTo({ top: chapterScrollTop(chapter), behavior: 'smooth' });
+    });
+  }
+
+  function updateBalanceJump() {
+    if (activeTab !== 'balance') return;
+    const btns = $$('.bg-jump__btn');
+    if (!btns.length) return;
+    let current = BALANCE_CHAPTERS[0].id;
+    BALANCE_CHAPTERS.forEach((ch) => {
+      const el = document.getElementById(`bgChapter-${ch.id}`);
+      if (el && chapterScrollTop(el) <= pageScroll.scrollTop + 40) current = ch.id;
+    });
+    btns.forEach((b) => b.classList.toggle('is-current', b.dataset.chapter === current));
+  }
+
+  function renderBalance() {
+    const list = $('#balanceList');
+    if (!list) return;
+
+    let seq = 0; // 노출 순서대로 01부터 다시 번호 매김
+    list.innerHTML = BALANCE_CHAPTERS.map((ch) => {
+      const icon = `<svg class="bg-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${BALANCE_ICONS[ch.icon]}</svg>`;
+      const first = seq + 1;
+      let cards = '';
+      ch.items.forEach((qNo) => {
+        const item = BALANCE_ITEMS[qNo - 1];
+        if (!item) return;
+        const no = pad2(++seq);
+        cards +=
+          `<article class="bg-card" id="bgCard${no}" aria-label="밸런스 게임 ${no}">` +
+          '<div class="bg-card__top">' +
+          `<span class="bg-card__no">${no}</span>` +
+          `<span class="bg-card__tag">${ch.label}</span>` +
+          icon +
+          '</div>' +
+          renderOption('A', item.a, item.pick === 'A', item.extra) +
+          '<div class="bg-vs" aria-hidden="true">VS</div>' +
+          renderOption('B', item.b, item.pick === 'B', item.extra) +
+          '</article>';
+      });
+      return (
+        `<section class="bg-chapter" id="bgChapter-${ch.id}">` +
+        '<div class="bg-chapter__head">' +
+        `<span class="bg-chapter__label">${ch.label}</span>` +
+        `<h3 class="bg-chapter__title">${ch.title}</h3>` +
+        '<span class="bg-chapter__line" aria-hidden="true"></span>' +
+        `<span class="bg-chapter__range">${pad2(first)}–${pad2(seq)}</span>` +
+        '</div>' +
+        `<div class="bg-chapter__cards">${cards}</div>` +
+        '</section>'
+      );
+    }).join('');
+
+    renderBalanceJump();
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          cardObserver.unobserve(card);
+          card.classList.add('is-in');
+          setTimeout(() => card.classList.add('is-picked'), reduceMotion ? 0 : 420);
+        });
+      },
+      { root: pageScroll, threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
+    );
+    $$('.bg-card').forEach((card) => cardObserver.observe(card));
+  }
+
+  /* ═══════════════════════════════════════════
+     TABS — 음성 특전 / 밸런스 게임 (#balance 로 바로 진입 가능)
+     ═══════════════════════════════════════════ */
+  const pageShell = $('.page-shell');
+  const tabsEl = $('#pageTabs');
+  const tabBtns = Array.from($$('.tabs__btn'));
+  const heroEl = $('.hero');
+  let activeTab = 'voice';
+
+  // sticky 상태와 무관한 탭의 원래 위치
+  function tabsNaturalTop() {
+    return heroEl ? heroEl.offsetTop + heroEl.offsetHeight : 0;
+  }
+
+  function setTab(name, { scroll = true, focus = false } = {}) {
+    if (name === activeTab) return;
+    activeTab = name;
+
+    tabBtns.forEach((btn) => {
+      const on = btn.dataset.tab === name;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.tabIndex = on ? 0 : -1;
+      if (on && focus) btn.focus();
+
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      panel.hidden = !on;
+      if (on) {
+        panel.classList.remove('is-entering');
+        void panel.offsetWidth; // restart animation
+        panel.classList.add('is-entering');
+      }
+    });
+
+    tabsEl.dataset.active = name;
+    pageShell.dataset.tab = name;
+
+    if (scroll) {
+      const top = tabsNaturalTop();
+      if (pageScroll.scrollTop > top) pageScroll.scrollTo({ top, behavior: 'auto' });
+    }
+
+    history.replaceState(null, '', name === 'balance' ? '#balance' : location.pathname + location.search);
+
+    requestAnimationFrame(() => {
+      updateFloaterPositions();
+      updateGallery(false);
+      onScroll();
+    });
+  }
+
+  function setupTabs() {
+    if (!tabsEl) return;
+    tabsEl.dataset.active = activeTab;
+    pageShell.dataset.tab = activeTab;
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => setTab(btn.dataset.tab));
+      btn.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        const idx = tabBtns.indexOf(btn);
+        const next = tabBtns[(idx + (e.key === 'ArrowRight' ? 1 : -1) + tabBtns.length) % tabBtns.length];
+        setTab(next.dataset.tab, { focus: true });
+      });
+    });
+
+    $('#panelVoice').addEventListener('animationend', (e) => e.currentTarget.classList.remove('is-entering'));
+    $('#panelBalance').addEventListener('animationend', (e) => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('is-entering');
+    });
+
+    if (location.hash === '#balance') setTab('balance', { scroll: false });
+  }
+
+  /* ═══════════════════════════════════════════
      SCROLL EFFECTS
      ═══════════════════════════════════════════ */
   let ticking = false;
@@ -463,6 +736,11 @@
       // Scroll-to-top button
       const showTop = scrollY > 120;
       scrollTopBtn.classList.toggle('is-visible', showTop);
+
+      // Sticky tabs — 상단에 붙으면 배경 강화
+      if (tabsEl) tabsEl.classList.toggle('is-stuck', scrollY >= tabsNaturalTop() - 1);
+
+      updateBalanceJump();
 
       // Translate the floater container synchronously with page scroll
       if (sideFloaters) {
@@ -549,6 +827,8 @@
     buildGallery();
     updateGallery(false);
     setupScrollAnimations();
+    renderBalance();
+    setupTabs();
 
     function onLayoutChange() {
       updateFloaterPositions();
