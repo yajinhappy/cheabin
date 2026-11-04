@@ -50,6 +50,18 @@
     { type: 'image', src: 'assets/gallery/3.png', alt: '특전 갤러리 03' },
     { type: 'image', src: 'assets/gallery/4.png', alt: '특전 갤러리 04' },
     { type: 'image', src: 'assets/gallery/5.png', alt: '특전 갤러리 05' },
+    { type: 'image', src: 'assets/gallery/6.png', alt: '특전 갤러리 06' },
+    { type: 'image', src: 'assets/gallery/7.png', alt: '특전 갤러리 07' },
+    { type: 'image', src: 'assets/gallery/8.png', alt: '특전 갤러리 08' },
+    { type: 'image', src: 'assets/gallery/9.png', alt: '특전 갤러리 09' },
+    { type: 'image', src: 'assets/gallery/10.png', alt: '특전 갤러리 10' },
+    { type: 'image', src: 'assets/gallery/11.png', alt: '특전 갤러리 11' },
+    { type: 'image', src: 'assets/gallery/12.png', alt: '특전 갤러리 12' },
+    { type: 'image', src: 'assets/gallery/13.png', alt: '특전 갤러리 13' },
+    { type: 'image', src: 'assets/gallery/14.png', alt: '특전 갤러리 14' },
+    { type: 'image', src: 'assets/gallery/15.png', alt: '특전 갤러리 15' },
+    { type: 'image', src: 'assets/gallery/16.png', alt: '특전 갤러리 16' },
+    { type: 'image', src: 'assets/gallery/17.png', alt: '특전 갤러리 17' },
   ];
 
   /* ═══════════════════════════════════════════
