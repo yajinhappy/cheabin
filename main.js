@@ -131,14 +131,11 @@
 
   /* ═══════════════════════════════════════════
      AUDIO PLAYER STATE
-     - 재생: jsDelivr CDN(트래픽 분산) 우선, 실패 시 로컬 파일로 자동 전환
-     - 로컬 개발 환경(localhost/file)에서는 로컬 파일 우선
+     - 재생: 내 사이트 파일(Cloudflare CDN) 우선, 실패 시 jsDelivr CDN으로 자동 전환
      ═══════════════════════════════════════════ */
   const AUDIO_FILE = 'assets/chaebin_voice_msg.mp3';
   const AUDIO_CDN = 'https://cdn.jsdelivr.net/gh/yajinhappy/cheabin@main/' + AUDIO_FILE;
-  const isLocalDev = location.protocol === 'file:' ||
-    /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
-  const audioSources = isLocalDev ? [AUDIO_FILE, AUDIO_CDN] : [AUDIO_CDN, AUDIO_FILE];
+  const audioSources = [AUDIO_FILE, AUDIO_CDN];
   let audioSourceIdx = 0;
 
   const voiceAudio = $('#voiceAudio');
