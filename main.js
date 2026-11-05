@@ -45,24 +45,24 @@
      GALLERY DATA
      ═══════════════════════════════════════════ */
   const galleryItems = [
-    { type: 'image', src: 'assets/gallery/1.png', alt: '특전 갤러리 01' },
-    { type: 'image', src: 'assets/gallery/2.png', alt: '특전 갤러리 02' },
-    { type: 'image', src: 'assets/gallery/3.png', alt: '특전 갤러리 03' },
-    { type: 'image', src: 'assets/gallery/5.png', alt: '특전 갤러리 05' },
-    { type: 'image', src: 'assets/gallery/5-1.png', alt: '특전 갤러리 05-1' },
-    { type: 'image', src: 'assets/gallery/5-2.png', alt: '특전 갤러리 05-2' },
-    { type: 'image', src: 'assets/gallery/6.png', alt: '특전 갤러리 06' },
-    { type: 'image', src: 'assets/gallery/7.png', alt: '특전 갤러리 07' },
-    { type: 'image', src: 'assets/gallery/8.png', alt: '특전 갤러리 08' },
-    { type: 'image', src: 'assets/gallery/9.png', alt: '특전 갤러리 09' },
-    { type: 'image', src: 'assets/gallery/10.png', alt: '특전 갤러리 10' },
-    { type: 'image', src: 'assets/gallery/11.png', alt: '특전 갤러리 11' },
-    { type: 'image', src: 'assets/gallery/12.png', alt: '특전 갤러리 12' },
-    { type: 'image', src: 'assets/gallery/13.png', alt: '특전 갤러리 13' },
-    { type: 'image', src: 'assets/gallery/14.png', alt: '특전 갤러리 14' },
-    { type: 'image', src: 'assets/gallery/15.png', alt: '특전 갤러리 15' },
-    { type: 'image', src: 'assets/gallery/16.png', alt: '특전 갤러리 16' },
-    { type: 'image', src: 'assets/gallery/17.png', alt: '특전 갤러리 17' },
+    { type: 'image', src: 'assets/gallery/1.webp', w: 567, h: 800, alt: '특전 갤러리 01' },
+    { type: 'image', src: 'assets/gallery/2.webp', w: 567, h: 800, alt: '특전 갤러리 02' },
+    { type: 'image', src: 'assets/gallery/3.webp', w: 952, h: 800, alt: '특전 갤러리 03' },
+    { type: 'image', src: 'assets/gallery/5.webp', w: 513, h: 800, alt: '특전 갤러리 05' },
+    { type: 'image', src: 'assets/gallery/5-1.webp', w: 610, h: 800, alt: '특전 갤러리 05-1' },
+    { type: 'image', src: 'assets/gallery/5-2.webp', w: 656, h: 800, alt: '특전 갤러리 05-2' },
+    { type: 'image', src: 'assets/gallery/6.webp', w: 450, h: 599, alt: '특전 갤러리 06' },
+    { type: 'image', src: 'assets/gallery/7.webp', w: 450, h: 600, alt: '특전 갤러리 07' },
+    { type: 'image', src: 'assets/gallery/8.webp', w: 450, h: 599, alt: '특전 갤러리 08' },
+    { type: 'image', src: 'assets/gallery/9.webp', w: 450, h: 599, alt: '특전 갤러리 09' },
+    { type: 'image', src: 'assets/gallery/10.webp', w: 450, h: 599, alt: '특전 갤러리 10' },
+    { type: 'image', src: 'assets/gallery/11.webp', w: 450, h: 600, alt: '특전 갤러리 11' },
+    { type: 'image', src: 'assets/gallery/12.webp', w: 450, h: 600, alt: '특전 갤러리 12' },
+    { type: 'image', src: 'assets/gallery/13.webp', w: 450, h: 599, alt: '특전 갤러리 13' },
+    { type: 'image', src: 'assets/gallery/14.webp', w: 450, h: 600, alt: '특전 갤러리 14' },
+    { type: 'image', src: 'assets/gallery/15.webp', w: 450, h: 599, alt: '특전 갤러리 15' },
+    { type: 'image', src: 'assets/gallery/16.webp', w: 450, h: 600, alt: '특전 갤러리 16' },
+    { type: 'image', src: 'assets/gallery/17.webp', w: 450, h: 600, alt: '특전 갤러리 17' },
   ];
 
   /* ═══════════════════════════════════════════
@@ -312,13 +312,14 @@
         slide.dataset.globalIndex = globalIdx;
 
         if (item.type === 'image') {
+          // 크기를 미리 지정해 로드 전에도 슬라이드 폭이 잡히게 하고,
+          // 실제 이미지는 현재 슬라이드 주변만 loadNearbySlides()에서 불러옴
           const img = document.createElement('img');
-          img.src = item.src;
+          img.dataset.src = item.src;
+          img.width = item.w;
+          img.height = item.h;
           img.alt = item.alt;
-          img.loading = 'eager';
-          img.addEventListener('load', () => {
-            updateGallery(false);
-          });
+          img.decoding = 'async';
           slide.appendChild(img);
         } else {
           const ph = document.createElement('div');
@@ -348,6 +349,18 @@
     }
   }
 
+  // 현재 슬라이드 앞뒤 PRELOAD_RANGE장만 이미지 로드 (화면 밖 사진은 넘길 때 불러옴)
+  const PRELOAD_RANGE = 2;
+  function loadNearbySlides(slides) {
+    for (let i = currentSlide - PRELOAD_RANGE; i <= currentSlide + PRELOAD_RANGE; i++) {
+      const img = slides[i] && slides[i].querySelector('img[data-src]');
+      if (img) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      }
+    }
+  }
+
   function snapIfNeeded() {
     clearTimeout(snapTimer);
     const n = totalSlides;
@@ -374,6 +387,7 @@
     slides.forEach((s, i) => {
       s.classList.toggle('is-active', i === currentSlide);
     });
+    loadNearbySlides(slides);
 
     const displayIndex = ((currentSlide % totalSlides) + totalSlides) % totalSlides;
     galleryCounter.textContent =
