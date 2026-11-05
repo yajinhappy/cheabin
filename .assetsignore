@@ -1,0 +1,10 @@
+.git
+.gitignore
+.vscode
+.thumbnail
+wrangler.jsonc
+package.json
+server.js
+dcall.py
+github.md
+uploads
